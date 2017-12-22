@@ -1,7 +1,6 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-{% load staticfiles %}
 <!-- Posts -->
   <section class="posts">
       {% for post in posts reversed %}
@@ -10,7 +9,7 @@
         <span class="date">{{ post.published_date }}</span>
         <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
       </header>
-      <a href="#" class="image fit"><img src="{% static 'images/pic02.jpg' %}" alt="" /></a>
+      <a href="#" class="image fit"><img src="static/images/pic02.jpg" alt="" /></a>
       <p>{{ post.text|linebreaksbr|truncatewords_html:26 }}</p>
       <ul class="actions">
         <li><a href="{% url 'post_detail' pk=post.pk %}" class="button">Full Story</a></li>
