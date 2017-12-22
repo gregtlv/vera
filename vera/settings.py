@@ -25,7 +25,7 @@ SECRET_KEY = '*fss3&ur2hdnt@e7hrz)v4jadel(p(#ms36nu6jz37wwh$-qfv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'greggy.pythonanywhere.com']
 
 
 # Application definition
