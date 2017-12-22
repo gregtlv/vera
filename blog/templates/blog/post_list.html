@@ -1,10 +1,9 @@
 {% extends 'blog/base.html' %}
-{% load staticfiles %}
 
 
 {% block content %}
+{% load staticfiles %}
 <!-- Posts -->
-
   <section class="posts">
       {% for post in posts reversed %}
     <article>
