@@ -1,11 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
-from .models import Post
+from .models import Post, Header
 from .forms import PostForm
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 import operator
 from django.db.models import Q
 from django.views.generic import ListView
+
+def display_header(request):
+    header_text = get_object_or_404(Header)
+    return render(request, 'blog/header.html', {'header_text':header_text})
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -42,23 +46,4 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
-class BlogSearchListView(): #BlogListView
-    """
-    Display a Blog List page filtered by the search query.
-    """
-    paginate_by = 10
 
-    def get_queryset(self):
-        result = super(BlogSearchListView, self).get_queryset()
-
-        query = self.request.GET.get('q')
-        if query:
-            query_list = query.split()
-            result = result.filter(
-                reduce(operator.and_,
-                       (Q(title__icontains=q) for q in query_list)) |
-                reduce(operator.and_,
-                       (Q(content__icontains=q) for q in query_list))
-            )
-
-        return result
